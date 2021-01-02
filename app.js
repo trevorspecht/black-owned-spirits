@@ -436,18 +436,18 @@ map.on("load", function () {
                     "circle-radius": 5,
                     "circle-opacity": 0.7,
                     "circle-color": {
-                      property: 'Cuisine', // geojson property to use to determine circle color
+                      property: 'Spirit Type', // geojson property to use to determine circle color
                       type: 'categorical',
                       stops: [
-                        ['African/Caribbean', '#563391'],
-                        ['American', '#BE2F77'],
-                        ['Asian', '#980DBA'],
-                        ['Breakfast Specialty', '#1AAEC6'],
-                        ['Seafood', '#1557EA'],
-                        ['Soul/Creole', '#500363'],
-                        ['Vegan/Healthy', '#5BD5B0'],
-                        ['Dessert', '#5980CF'],
-                        ['Coffee/Tea', '#CE9D78']
+                        ['Vodka', '#563391'],
+                        ['Bourbon/Whiskey', '#BE2F77'],
+                        ['Tequila', '#980DBA'],
+                        ['Rum', '#1AAEC6'],
+                        ['Gin', '#1557EA'],
+                        ['Cognac', '#500363'],
+                        ['Liqueur/Other', '#5BD5B0'],
+                        // ['Dessert', '#5980CF'],
+                        ['Multiple Types', '#CE9D78']
                       ]
                     }
                 }
