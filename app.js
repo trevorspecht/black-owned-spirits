@@ -436,7 +436,7 @@ map.on("load", function () {
                     "circle-radius": 5,
                     "circle-opacity": 0.7,
                     "circle-color": {
-                      property: 'Spirit Type', // geojson property to use to determine circle color
+                      property: 'Spirit', // geojson property to use to determine circle color
                       type: 'categorical',
                       stops: [
                         ['Vodka', '#563391'],
