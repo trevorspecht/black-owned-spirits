@@ -11,13 +11,13 @@ soup = BeautifulSoup(html.text, "lxml")
 
 token = 'pk.eyJ1IjoidHJldm9yc3BlY2h0IiwiYSI6ImNrYzJoM2t4ODAxNDAycnF0cHo5eHoybDcifQ.-Pw1y6ZbWuUMooRWmJAK1Q'
 
-# gets everything between the ()
-addressregex = re.compile(r'(?<=\().+(?=\))')
-# gets everything after the ()
-descregex = re.compile(r'(?<=\) ).+')
+# gets everything between the []
+locationregex = re.compile(r'(?<=\[).+(?=\])')
+# gets everything after the []
+descregex = re.compile(r'(?<=\] ).+')
 
-with open('restaurants.csv', mode='w', newline='') as restaurants:
-  rest_writer = csv.writer(restaurants, delimiter=',', quotechar='"')
+with open('spirits.csv', mode='w', newline='') as spirits:
+  rest_writer = csv.writer(spirits, delimiter=',', quotechar='"')
   # iterates over <li> tags
   for i, listing in enumerate(soup.find_all('li')):
     # initialize variables for each iteration
@@ -32,18 +32,18 @@ with open('restaurants.csv', mode='w', newline='') as restaurants:
     # isolate text in <p> tags
     if len(listing.p.contents) > 1:
       text = str(listing.p.contents[1])
-    # isolate address
-    addressmatch = addressregex.search(text)
-    if addressmatch:
-      address = addressmatch.group(0)
+    # isolate location(s)
+    locationmatch = locationregex.search(text)
+    if locationmatch:
+      location = locationmatch.group(0)
       # forward geocode map coordinates from address
-      geocoderesponse = geocoder.mapbox(address, key=token)
-      if geocoderesponse:
-        latitude = geocoderesponse.latlng[0]
-        longitude = geocoderesponse.latlng[1]
+      # geocoderesponse = geocoder.mapbox(location, key=token)
+      # if geocoderesponse:
+      #   latitude = geocoderesponse.latlng[0]
+      #   longitude = geocoderesponse.latlng[1]
     # isolate description
     descmatch = descregex.search(text)
     if descmatch:
       description = descmatch.group(0)
     # write to csv
-    rest_writer.writerow([name, address, latitude, longitude, link, description])
+    rest_writer.writerow([name, location, latitude, longitude, link, description])
