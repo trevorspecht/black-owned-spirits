@@ -22,7 +22,7 @@ with open('spirits.csv', mode='w', newline='') as spirits:
   for i, listing in enumerate(soup.find_all('li')):
     # initialize variables for each iteration
     text = ''
-    address = ''
+    location = ''
     description = ''
     latitude = ''
     longitude = ''
@@ -45,5 +45,7 @@ with open('spirits.csv', mode='w', newline='') as spirits:
     descmatch = descregex.search(text)
     if descmatch:
       description = descmatch.group(0)
+    else:
+      description = text
     # write to csv
     rest_writer.writerow([name, location, latitude, longitude, link, description])
