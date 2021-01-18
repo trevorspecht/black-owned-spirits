@@ -66,7 +66,7 @@ function buildLocationList(locationData) {
 
         link.addEventListener("click", function () {
             const clickedListing = location.geometry.coordinates;
-            flyToLocation(clickedListing, 11);
+            flyToLocation(clickedListing, 4);
             createPopup(location);
 
             const activeItem = document.getElementsByClassName("active");
@@ -352,7 +352,7 @@ const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken, // Set the access token
     mapboxgl: mapboxgl, // Set the mapbox-gl instance
     marker: true, // Use the geocoder's default marker style
-    zoom: 11
+    zoom: 3
 });
 
 function sortByDistance(selectedPoint) {
@@ -445,9 +445,7 @@ map.on("load", function () {
                         ['Rum', '#1AAEC6'],
                         ['Gin', '#1557EA'],
                         ['Cognac', '#500363'],
-                        ['Liqueur/Other', '#5BD5B0'],
-                        // ['Dessert', '#5980CF'],
-                        ['Multiple Types', '#CE9D78']
+                        ['Liqueur/Other', '#5BD5B0']
                       ]
                     }
                 }
@@ -460,7 +458,7 @@ map.on("load", function () {
                 layers: ["locationData"]
             });
             const clickedPoint = features[0].geometry.coordinates;
-            flyToLocation(clickedPoint, 11);
+            flyToLocation(clickedPoint, 4);
             sortByDistance(clickedPoint);
             createPopup(features[0]);
         });

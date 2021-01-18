@@ -7,7 +7,7 @@ const config = {
     zoom: 3, //Default zoom
     title: "Black-owned Spirits",
     description: "Find spirits available by location",
-    sideBarInfo: ["Name", "Address", "Website", "Phone"],
+    sideBarInfo: ["Name", "Locations", "Website"],
     popupInfo: ["Name", "Website"],
     filters: [
         {
@@ -21,8 +21,7 @@ const config = {
               'Rum',
               'Gin',
               'Cognac',
-              'Liqueur/Other',
-              'Multiple Types'
+              'Liqueur/Other'
             ]
         }
       /*  {
