@@ -445,9 +445,7 @@ map.on("load", function () {
                         ['Rum', '#1AAEC6'],
                         ['Gin', '#1557EA'],
                         ['Cognac', '#500363'],
-                        ['Liqueur/Other', '#5BD5B0'],
-                        // ['Dessert', '#5980CF'],
-                        ['Multiple Types', '#CE9D78']
+                        ['Liqueur/Other', '#5BD5B0']
                       ]
                     }
                 }

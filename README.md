@@ -9,7 +9,5 @@ This repository includes a Python web scraper script built using the BeautifulSo
 It parses out the following from the web page:
 - retailer name
 - web site URL
-- location
+- location(s)
 - description
-
-The script then uses the `geocoder` library to generate latitude and longitude coordinates from each location. It writes the results to the Google sheet used for populating the map with the Sheet Mapper tool. 
