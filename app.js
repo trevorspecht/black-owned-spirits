@@ -394,6 +394,13 @@ geocoder.on("result", function (ev) {
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
+    // Add a source for the state polygons.
+    map.addSource('states', {
+        'type': 'geojson',
+        'data':
+            'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson'
+    });
+
     // Add a layer showing state polygons for the United States
     map.addLayer({
         'id': 'states-layer',
