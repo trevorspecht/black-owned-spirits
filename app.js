@@ -391,16 +391,16 @@ map.on("load", function () {
             });
 
             geojsonData = data;
-        });
 
-        // add locations layer
-        map.addLayer({
-            "id": "locationData",
-            "type": "circle",
-            "source": {
-                "type": "geojson",
-                "data": geojsonData
-            }
+            // add locations layer
+            map.addLayer({
+                "id": "locationData",
+                "type": "circle",
+                "source": {
+                    "type": "geojson",
+                    "data": geojsonData
+                }
+            });
         });
 
         // Add a source for the state polygons.
