@@ -6,6 +6,10 @@ const filteredGeojson = {
     "type": "FeatureCollection",
     "features": []
 };
+const clickedStateLocations = {
+    "type": "FeatureCollection",
+    "features": []
+};
 
 const map = new mapboxgl.Map({
     container: "map",
@@ -27,7 +31,6 @@ function createPopup(currentFeature) {
     if (popups[0]) popups[0].remove();
     const popup = new mapboxgl.Popup({ closeOnClick: true })
         .setLngLat(currentFeature.geometry.coordinates)
-        // .setHTML("<h3>" + currentFeature.properties[config.popupInfo[0]] + "</h3>" + "<h4>" + currentFeature.properties[config.popupInfo[1]] + "</h4>")
         .setHTML("<h3" + ' style="color: #2F215F; text-decoration: underline;"' + ">" + "<a href=" + currentFeature.properties[config.popupInfo[1]] + ' target="_blank" rel="noopener noreferrer"' + ">" + currentFeature.properties[config.popupInfo[0]] + "</a>" + "</h3>")
         .addTo(map);
 }
@@ -355,42 +358,6 @@ const geocoder = new MapboxGeocoder({
     zoom: 3
 });
 
-function sortByDistance(selectedPoint) {
-    const options = { units: "miles" };
-    geojsonData.features.forEach(function (data) {
-        Object.defineProperty(data.properties, "distance", {
-            value: turf.distance(selectedPoint, data.geometry, options),
-            writable: true,
-            enumerable: true,
-            configurable: true
-        });
-
-
-    });
-
-    geojsonData.features.sort(function (a, b) {
-        if (a.properties.distance > b.properties.distance) {
-            return 1;
-        }
-        if (a.properties.distance < b.properties.distance) {
-            return -1;
-        }
-        return 0; // a must be equal to b
-    });
-    const listings = document.getElementById("listings");
-    while (listings.firstChild) {
-        listings.removeChild(listings.firstChild);
-    }
-    buildLocationList(geojsonData);
-}
-
-geocoder.on("result", function (ev) {
-    const searchResult = ev.result.geometry;
-    removeFilters();
-    sortByDistance(searchResult);
-
-});
-
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
@@ -442,50 +409,24 @@ map.on("load", function () {
             });
 
             geojsonData = data;
-            // Add the the layer to the map
-            map.addLayer({
-                "id": "locationData",
-                "type": "circle",
-                "source": {
-                    "type": "geojson",
-                    "data": geojsonData
-                },
-                "paint": {
-                    "circle-radius": 5,
-                    "circle-opacity": 0.7,
-                    "circle-color": {
-                      property: 'Spirit', // geojson property to use to determine circle color
-                      type: 'categorical',
-                      stops: [
-                        ['Vodka', '#563391'],
-                        ['Bourbon/Whiskey', '#BE2F77'],
-                        ['Tequila', '#980DBA'],
-                        ['Rum', '#1AAEC6'],
-                        ['Gin', '#1557EA'],
-                        ['Cognac', '#500363'],
-                        ['Liqueur/Other', '#5BD5B0']
-                      ]
-                    }
-                }
-
-            });
         });
 
-        map.on("click", "locationData", function (e) {
-            const features = map.queryRenderedFeatures(e.point, {
-                layers: ["locationData"]
+        // sort list by state when a state is clicked
+        map.on('click', 'states-layer', function (e) {
+            const clickedState = e.features[0].properties.name;
+            geojsonData.features.forEach(function (feature) {
+                if (clickedState == feature.locations)
+                    clickedStateLocations.features.push(feature);
             });
-            const clickedPoint = features[0].geometry.coordinates;
-            flyToLocation(clickedPoint, 4);
-            sortByDistance(clickedPoint);
-            createPopup(features[0]);
+            map.getSource("locationData").setData(clickedStateLocations);
+            buildLocationList(clickedStateLocations);
         });
 
-        map.on("mouseenter", "locationData", function () {
+        map.on("mouseenter", "states-layer", function () {
             map.getCanvas().style.cursor = "pointer";
         });
 
-        map.on("mouseleave", "locationData", function () {
+        map.on("mouseleave", "states-layer", function () {
             map.getCanvas().style.cursor = "";
         });
         buildLocationList(geojsonData);

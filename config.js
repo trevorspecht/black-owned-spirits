@@ -7,7 +7,7 @@ const config = {
     zoom: 3, //Default zoom
     title: "Black-owned Spirits",
     description: "Find spirits available by location",
-    sideBarInfo: ["Name", "Locations", "Website"],
+    sideBarInfo: ["Name", "Locations", "Description"],
     popupInfo: ["Name", "Website"],
     filters: [
         {
