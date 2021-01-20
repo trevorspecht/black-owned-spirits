@@ -361,24 +361,6 @@ const geocoder = new MapboxGeocoder({
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
-    // Add a source for the state polygons.
-    map.addSource('states', {
-        'type': 'geojson',
-        'data':
-            'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson'
-    });
-
-    // Add a layer showing state polygons for the United States
-    map.addLayer({
-        'id': 'states-layer',
-        'type': 'fill',
-        'source': 'states',
-        'paint': {
-            'fill-color': 'rgba(200, 100, 240, 0.4)',
-            'fill-outline-color': 'rgba(200, 100, 240, 1)'
-        }
-    });
-
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
     $(document).ready(function () {
@@ -421,16 +403,34 @@ map.on("load", function () {
             }
         });
 
-        // sort list by state when a state is clicked
-        map.on('click', 'states-layer', function (e) {
-            const clickedState = e.features[0].properties.name;
-            geojsonData.features.forEach(function (feature) {
-                if (clickedState == feature.locations)
-                    clickedStateLocations.features.push(feature);
-            });
-            map.getSource("locationData").setData(clickedStateLocations);
-            buildLocationList(clickedStateLocations);
+        // Add a source for the state polygons.
+        map.addSource('states', {
+            'type': 'geojson',
+            'data':
+                'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson'
         });
+
+        // Add a layer showing state polygons for the United States
+        map.addLayer({
+            'id': 'states-layer',
+            'type': 'fill',
+            'source': 'states',
+            'paint': {
+                'fill-color': 'rgba(200, 100, 240, 0.4)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+            }
+        });
+
+        // sort list by state when a state is clicked
+        // map.on('click', 'states-layer', function (e) {
+        //     const clickedState = e.features[0].properties.name;
+        //     geojsonData.features.forEach(function (feature) {
+        //         if (clickedState == feature.locations)
+        //             clickedStateLocations.features.push(feature);
+        //     });
+        //     map.getSource("locationData").setData(clickedStateLocations);
+        //     buildLocationList(clickedStateLocations);
+        // });
 
         map.on("mouseenter", "states-layer", function () {
             map.getCanvas().style.cursor = "pointer";
