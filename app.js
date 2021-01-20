@@ -411,6 +411,16 @@ map.on("load", function () {
             geojsonData = data;
         });
 
+        // add locations layer
+        map.addLayer({
+            "id": "locationData",
+            "type": "circle",
+            "source": {
+                "type": "geojson",
+                "data": geojsonData
+            }
+        });
+
         // sort list by state when a state is clicked
         map.on('click', 'states-layer', function (e) {
             const clickedState = e.features[0].properties.name;
