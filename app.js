@@ -409,19 +409,20 @@ map.on("load", function () {
             });
 
             geojsonData = data;
+
+            // add locations layer
+            map.addLayer({
+                "id": "locationData",
+                "type": "circle",
+                "source": {
+                    "type": "geojson",
+                    "data": geojsonData,
+                },
+                "layout": "none"
+            });
         });
     };
 
-    // add locations layer
-    map.addLayer({
-        "id": "locationData",
-        "type": "circle",
-        "source": {
-            "type": "geojson",
-            "data": geojsonData,
-        },
-        "layout": "none"
-    });
 
     // sort list by state when a state is clicked
     // map.on('click', 'states-layer', function (e) {
