@@ -448,6 +448,7 @@ map.on("load", function () {
         map.getCanvas().style.cursor = "";
     });
 
+    map.getSource("locationData").setData(geojsonData);
     buildLocationList(geojsonData);
 });
 
