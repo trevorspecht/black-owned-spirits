@@ -418,8 +418,9 @@ map.on("load", function () {
         "type": "circle",
         "source": {
             "type": "geojson",
-            "data": geojsonData
-        }
+            "data": geojsonData,
+        },
+        "layout": "none"
     });
 
     // sort list by state when a state is clicked
@@ -440,7 +441,7 @@ map.on("load", function () {
     map.on("mouseleave", "states-layer", function () {
         map.getCanvas().style.cursor = "";
     });
-    
+
     buildLocationList(geojsonData);
 });
 
