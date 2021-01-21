@@ -409,7 +409,7 @@ map.on("load", function () {
             });
 
             geojsonData = data;
-            console.log(geojsonData);
+            console.log(geojsonData.features);
 
             // add locations layer
             map.addLayer({
