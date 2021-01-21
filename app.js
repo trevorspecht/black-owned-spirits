@@ -442,15 +442,15 @@ map.on("load", function () {
 
 
     // sort list by state when a state is clicked
-    // map.on('click', 'states-layer', function (e) {
-    //     const clickedState = e.features[0].properties.name;
-    //     geojsonData.features.forEach(function (feature) {
-    //         if (clickedState == feature.locations)
-    //             clickedStateLocations.features.push(feature);
-    //     });
-    //     map.getSource("locationData").setData(clickedStateLocations);
-    //     buildLocationList(clickedStateLocations);
-    // });
+    map.on('click', 'states-layer', function (e) {
+        const clickedState = e.features[0].properties.name;
+        geojsonData.features.forEach(function (feature) {
+            if (clickedState == feature.locations)
+                clickedStateLocations.features.push(feature);
+        });
+        map.getSource("locationData").setData(clickedStateLocations);
+        buildLocationList(clickedStateLocations);
+    });
 
     map.on("mouseenter", "states-layer", function () {
         map.getCanvas().style.cursor = "pointer";
