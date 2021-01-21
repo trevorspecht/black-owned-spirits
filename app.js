@@ -409,7 +409,6 @@ map.on("load", function () {
             });
 
             geojsonData = data;
-            console.log(geojsonData);
 
             // add locations layer
             map.addLayer({
@@ -447,8 +446,8 @@ map.on("load", function () {
     map.on("mouseleave", "states-layer", function () {
         map.getCanvas().style.cursor = "";
     });
-
-    map.getSource("locationData").setData(geojsonData);
+    
+    console.log(geojsonData);
     buildLocationList(geojsonData);
 });
 
