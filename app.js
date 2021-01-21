@@ -424,6 +424,8 @@ map.on("load", function () {
 
                 }
             });
+            
+            buildLocationList(geojsonData);
         });
     };
 
@@ -446,9 +448,7 @@ map.on("load", function () {
     map.on("mouseleave", "states-layer", function () {
         map.getCanvas().style.cursor = "";
     });
-    
-    console.log(geojsonData);
-    buildLocationList(geojsonData);
+
 });
 
 // Modal - popup for filtering results
