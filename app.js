@@ -409,38 +409,39 @@ map.on("load", function () {
             });
 
             geojsonData = data;
-
-            // add locations layer
-            map.addLayer({
-                "id": "locationData",
-                "type": "circle",
-                "source": {
-                    "type": "geojson",
-                    "data": geojsonData
-                }
-            });
         });
-
-        // sort list by state when a state is clicked
-        // map.on('click', 'states-layer', function (e) {
-        //     const clickedState = e.features[0].properties.name;
-        //     geojsonData.features.forEach(function (feature) {
-        //         if (clickedState == feature.locations)
-        //             clickedStateLocations.features.push(feature);
-        //     });
-        //     map.getSource("locationData").setData(clickedStateLocations);
-        //     buildLocationList(clickedStateLocations);
-        // });
-
-        map.on("mouseenter", "states-layer", function () {
-            map.getCanvas().style.cursor = "pointer";
-        });
-
-        map.on("mouseleave", "states-layer", function () {
-            map.getCanvas().style.cursor = "";
-        });
-        buildLocationList(geojsonData);
     };
+
+    // add locations layer
+    map.addLayer({
+        "id": "locationData",
+        "type": "circle",
+        "source": {
+            "type": "geojson",
+            "data": geojsonData
+        }
+    });
+
+    // sort list by state when a state is clicked
+    // map.on('click', 'states-layer', function (e) {
+    //     const clickedState = e.features[0].properties.name;
+    //     geojsonData.features.forEach(function (feature) {
+    //         if (clickedState == feature.locations)
+    //             clickedStateLocations.features.push(feature);
+    //     });
+    //     map.getSource("locationData").setData(clickedStateLocations);
+    //     buildLocationList(clickedStateLocations);
+    // });
+
+    map.on("mouseenter", "states-layer", function () {
+        map.getCanvas().style.cursor = "pointer";
+    });
+
+    map.on("mouseleave", "states-layer", function () {
+        map.getCanvas().style.cursor = "";
+    });
+    
+    buildLocationList(geojsonData);
 });
 
 // Modal - popup for filtering results
