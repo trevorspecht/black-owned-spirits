@@ -434,7 +434,7 @@ map.on("load", function () {
         };
         const clickedState = e.features[0].properties.name;
         geojsonData.features.forEach(function (feature) {
-            const locations = feature.properties.locations;
+            const locations = feature.properties.Locations;
             if (locations.includes(clickedState))
                 clickedStateLocations.features.push(feature);
         });
