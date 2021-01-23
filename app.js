@@ -6,10 +6,6 @@ const filteredGeojson = {
     "type": "FeatureCollection",
     "features": []
 };
-const clickedStateLocations = {
-    "type": "FeatureCollection",
-    "features": []
-};
 
 const map = new mapboxgl.Map({
     container: "map",
@@ -432,9 +428,13 @@ map.on("load", function () {
 
     // sort list by state when a state is clicked
     map.on('click', 'states-layer', function (e) {
+        let clickedStateLocations = {
+            "type": "FeatureCollection",
+            "features": []
+        };
         const clickedState = e.features[0].properties.name;
         geojsonData.features.forEach(function (feature) {
-            const locations = feature.properties.Locations;
+            const locations = feature.properties.locations;
             if (locations.includes(clickedState))
                 clickedStateLocations.features.push(feature);
         });
