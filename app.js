@@ -50,7 +50,7 @@ function buildLocationList(locationData) {
         link.className = "title";
 
         link.id = "link-" + prop.id;
-        link.innerHTML = '<button class="flex-parent flex-parent--center-main">' + '<p style="line-height: 1.25">' + prop[columnHeaders[0]] + "</p>" + "</button>";
+        link.innerHTML = '<button class="flex-parent flex-parent--center-main">' + '<p style="line-height: 1.25">' + "<a href=" + prop.Website + ' target="_blank" rel="noopener noreferrer"' + ">" + prop.Name + "</a>" + "</p>" + "</button>";
 
         /* Add details to the individual listing. */
         const details = listing.appendChild(document.createElement("div"));
@@ -63,34 +63,34 @@ function buildLocationList(locationData) {
             details.appendChild(div);
         }
 
-        link.addEventListener("click", function () {
-            const clickedListing = location.geometry.coordinates;
-            flyToLocation(clickedListing, 4);
-            createPopup(location);
+        // link.addEventListener("click", function () {
+        //     const clickedListing = location.geometry.coordinates;
+        //     flyToLocation(clickedListing, 4);
+        //     createPopup(location);
 
-            const activeItem = document.getElementsByClassName("active");
-            if (activeItem[0]) {
-                activeItem[0].classList.remove("active");
-            }
-            this.parentNode.classList.add("active");
+        //     const activeItem = document.getElementsByClassName("active");
+        //     if (activeItem[0]) {
+        //         activeItem[0].classList.remove("active");
+        //     }
+        //     this.parentNode.classList.add("active");
 
-            const divList = document.querySelectorAll(".content");
-            const divCount = divList.length;
-            for (i = 0; i < divCount; i++) {
-                divList[i].style.maxHeight = null;
-            };
+        //     const divList = document.querySelectorAll(".content");
+        //     const divCount = divList.length;
+        //     for (i = 0; i < divCount; i++) {
+        //         divList[i].style.maxHeight = null;
+        //     };
 
-            for (let i = 0; i < geojsonData.features.length; i++) {
-                this.parentNode.classList.remove("active");
-                this.classList.toggle("active");
-                const content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            };
-        });
+        //     for (let i = 0; i < geojsonData.features.length; i++) {
+        //         this.parentNode.classList.remove("active");
+        //         this.classList.toggle("active");
+        //         const content = this.nextElementSibling;
+        //         if (content.style.maxHeight) {
+        //             content.style.maxHeight = null;
+        //         } else {
+        //             content.style.maxHeight = content.scrollHeight + "px";
+        //         }
+        //     };
+        // });
     });
 
 };
