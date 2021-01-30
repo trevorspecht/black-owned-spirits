@@ -453,11 +453,11 @@ map.on("load", function () {
 });
 
 // Modal - popup for filtering results
-const filterButtons = document.getElementById("filterButtons");
+const removeFilters = document.getElementById("removeFilters");
 const exitButton = document.getElementById("exitButton");
 const modal = document.getElementById("modal");
 
-filterButtons.addEventListener("click", () => {
+removeFilters.addEventListener("click", () => {
     modal.classList.remove("hide-visually");
     modal.classList.add("z5");
 });
