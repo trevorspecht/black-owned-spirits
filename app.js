@@ -372,7 +372,8 @@ map.on("load", function () {
         'paint': {
             'fill-color': 'rgba(200, 100, 255, 0.4)',
             'fill-outline-color': 'rgba(200, 100, 255, 1)'
-        }
+        },
+        'filter': ["!=", "United States", feature.properties.name]
     });
 
     // Add a source for the state polygons.
