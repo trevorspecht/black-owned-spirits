@@ -357,6 +357,24 @@ const geocoder = new MapboxGeocoder({
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
+    // add Boundaries tileset to the map
+    map.addSource('country-boundaries', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.country-boundaries-v1'
+    });
+
+    // Add a layer showing country boundary polygons
+    map.addLayer({
+        'id': 'countries-layer',
+        'type': 'fill',
+        'source': 'country-boundaries',
+        'source-layer': 'country_boundaries',
+        'paint': {
+            'fill-color': 'rgba(200, 100, 255, 0.4)',
+            'fill-outline-color': 'rgba(200, 100, 255, 1)'
+        }
+    });
+
     // Add a source for the state polygons.
     map.addSource('states', {
         'type': 'geojson',
@@ -365,33 +383,19 @@ map.on("load", function () {
     });
 
     // Add a layer showing state polygons for the United States
-    map.addLayer({
-        'id': 'states-layer',
-        'type': 'fill',
-        'source': 'states',
-        'paint': {
-            'fill-color': 'rgba(200, 100, 240, 0.4)',
-            'fill-outline-color': 'rgba(200, 100, 240, 1)'
-        }
-    });
-
-    // add Boundaries tileset to the map
-    map.addSource('admin-1', {
-        'type': 'vector',
-        'url': 'mapbox://mapbox.boundaries-adm1-v3'
-    });
-
-    // Add a layer showing country boundary polygons
-    map.addLayer({
-        'id': 'countries-layer',
-        'type': 'fill',
-        'source': 'admin-1',
-        'source-layer': 'boundaries-admin-1',
-        'paint': {
-            'fill-color': 'rgba(200, 100, 255, 0.4)',
-            'fill-outline-color': 'rgba(200, 100, 255, 1)'
-        }
-    });
+    map.addLayer(
+        {
+            'id': 'states-layer',
+            'type': 'fill',
+            'source': 'states',
+            'paint': {
+                'fill-color': 'rgba(200, 100, 240, 0.4)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+            }
+        },
+        // makes it so the states-layer will be rendered on top of the countries-layer
+        'countries-layer'
+    );
 
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
