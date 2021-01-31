@@ -357,25 +357,6 @@ const geocoder = new MapboxGeocoder({
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
-    // add Boundaries tileset to the map
-    map.addSource('country-boundaries', {
-        'type': 'vector',
-        'url': 'mapbox://mapbox.country-boundaries-v1'
-    });
-
-    // Add a layer showing country boundary polygons
-    map.addLayer({
-        'id': 'countries-layer',
-        'type': 'fill',
-        'source': 'country-boundaries',
-        'source-layer': 'country_boundaries',
-        'paint': {
-            'fill-color': 'rgba(200, 100, 255, 0.4)',
-            'fill-outline-color': 'rgba(200, 100, 255, 1)'
-        },
-        'filter': ["!=", "United States", feature.properties.name]
-    });
-
     // Add a source for the state polygons.
     map.addSource('states', {
         'type': 'geojson',
@@ -393,9 +374,29 @@ map.on("load", function () {
                 'fill-color': 'rgba(200, 100, 240, 0.4)',
                 'fill-outline-color': 'rgba(200, 100, 240, 1)'
             }
+        }
+    );
+
+    // add Boundaries tileset to the map
+    map.addSource('country-boundaries', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.country-boundaries-v1'
+    });
+
+    // Add a layer showing country boundary polygons
+    map.addLayer(
+            {
+            'id': 'countries-layer',
+            'type': 'fill',
+            'source': 'country-boundaries',
+            'source-layer': 'country_boundaries',
+            'paint': {
+                'fill-color': 'rgba(200, 100, 255, 0.4)',
+                'fill-outline-color': 'rgba(200, 100, 255, 1)'
+            }
         },
         // makes it so the states-layer will be rendered on top of the countries-layer
-        'countries-layer'
+        'states-layer'
     );
 
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
