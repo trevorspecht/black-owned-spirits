@@ -386,6 +386,7 @@ map.on("load", function () {
         'id': 'countries-layer',
         'type': 'fill',
         'source': 'admin-1',
+        'source-layer': 'boundaries-admin-1',
         'paint': {
             'fill-color': 'rgba(200, 100, 255, 0.4)',
             'fill-outline-color': 'rgba(200, 100, 255, 1)'
