@@ -464,6 +464,22 @@ map.on("load", function () {
         buildLocationList(clickedStateLocations);
     });
 
+    // sort list by country when a country is clicked
+    map.on('click', 'countries-layer', function (e) {
+        let clickedCountryLocations = {
+            "type": "FeatureCollection",
+            "features": []
+        };
+        const clickedCountry = e.features[0].properties.name;
+        geojsonData.features.forEach(function (feature) {
+            const locations = feature.properties.Locations;
+            if (locations.includes(clickedCountry))
+                clickedCountryLocations.features.push(feature);
+        });
+        map.getSource("locationData").setData(clickedCountryLocations);
+        buildLocationList(clickedCountryLocations);
+    });
+
     map.on("mouseenter", "states-layer", function () {
         map.getCanvas().style.cursor = "pointer";
     });
