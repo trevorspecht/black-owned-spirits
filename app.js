@@ -375,6 +375,23 @@ map.on("load", function () {
         }
     });
 
+        // add Boundaries tileset to the map
+        map.addSource('admin-1', {
+            'type': 'vector',
+            'url': 'mapbox://mapbox.boundaries-adm1-v3'
+        });
+    
+        // Add a layer showing country boundary polygons
+        map.addLayer({
+            'id': 'countries-layer',
+            'type': 'fill',
+            'source': 'admin-1',
+            'paint': {
+                'fill-color': 'rgba(200, 100, 260, 0.4)',
+                'fill-outline-color': 'rgba(200, 100, 260, 1)'
+            }
+        });
+
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
     $(document).ready(function () {
