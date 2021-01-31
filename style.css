@@ -9,6 +9,11 @@
 
 }
 
+#exitButton {
+    font-size: 9px;
+    color: #2F215F;
+}
+
 .theme{
     background-color: #563391;
 }
