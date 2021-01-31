@@ -468,6 +468,14 @@ map.on("load", function () {
         map.getCanvas().style.cursor = "";
     });
 
+    map.on("mouseenter", "countries-layer", function () {
+        map.getCanvas().style.cursor = "pointer";
+    });
+
+    map.on("mouseleave", "countries-layer", function () {
+        map.getCanvas().style.cursor = "";
+    });
+
 });
 
 // Modal - popup for filtering results
