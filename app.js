@@ -385,17 +385,20 @@ map.on("load", function () {
 
     // Add a layer showing country boundary polygons
     map.addLayer(
-            {
+        {
             'id': 'countries-layer',
             'type': 'fill',
             'source': 'country-boundaries',
             'source-layer': 'country_boundaries',
+            'layout': {
+                'visibility': 'none'
+            },
             'paint': {
                 'fill-color': 'rgba(200, 100, 255, 0.4)',
                 'fill-outline-color': 'rgba(200, 100, 255, 1)'
             }
         },
-        // makes it so the states-layer will be rendered on top of the countries-layer
+        // makes it so the countries-layer will be rendered underneath the states-layer
         'states-layer'
     );
 
@@ -492,10 +495,12 @@ map.on("load", function () {
 
     map.on("mouseenter", "countries-layer", function () {
         map.getCanvas().style.cursor = "pointer";
+        map.setLayoutProperty('countries-layer', 'visibility', 'visible');
     });
 
     map.on("mouseleave", "countries-layer", function () {
         map.getCanvas().style.cursor = "";
+        map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
 });
