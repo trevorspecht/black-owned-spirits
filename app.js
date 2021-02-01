@@ -406,8 +406,18 @@ map.on("load", function () {
                 'visibility': 'visible'
             },
             'paint': {
-                'fill-color': 'rgba(200, 100, 255, 0.3)',
-                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+                'fill-color': [
+                    'case', 
+                    ['boolean', ['feature-state', 'hover'], false],
+                    'rgba(200, 100, 255, 0.3)',
+                    'rgba(200, 100, 255, 0)'
+                ],
+                'fill-outline-color': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false],
+                    'rgba(200, 100, 240, 1)',
+                    'rgba(200, 100, 240, 0)'
+                ]
             }
         },
         // makes it so the countries-layer will be rendered underneath the states-layer
