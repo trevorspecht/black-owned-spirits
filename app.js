@@ -371,7 +371,7 @@ map.on("load", function () {
             'type': 'fill',
             'source': 'states',
             'paint': {
-                'fill-color': 'rgba(200, 100, 240, 0.4)',
+                'fill-color': 'rgba(200, 100, 255, 0.3)',
                 'fill-outline-color': 'rgba(200, 100, 240, 1)'
             }
         }
@@ -394,8 +394,8 @@ map.on("load", function () {
                 'visibility': 'visible'
             },
             'paint': {
-                'fill-color': 'rgba(200, 100, 255, 0.4)',
-                'fill-outline-color': 'rgba(200, 100, 255, 1)'
+                'fill-color': 'rgba(200, 100, 255, 0.3)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
             }
         },
         // makes it so the countries-layer will be rendered underneath the states-layer
@@ -487,6 +487,8 @@ map.on("load", function () {
 
     map.on("mouseenter", "states-layer", function () {
         map.getCanvas().style.cursor = "pointer";
+        // when pointer is over states-layer make countries-layer invisible
+        // this is because countries-layer was intercepting clicks in states-layer
         map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
