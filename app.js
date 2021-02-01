@@ -391,7 +391,7 @@ map.on("load", function () {
             'source': 'country-boundaries',
             'source-layer': 'country_boundaries',
             'layout': {
-                'visibility': 'none'
+                'visibility': 'visible'
             },
             'paint': {
                 'fill-color': 'rgba(200, 100, 255, 0.4)',
