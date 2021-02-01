@@ -354,6 +354,8 @@ const geocoder = new MapboxGeocoder({
     zoom: 3
 });
 
+let hoveredStateId, hoveredCountryId = null;
+
 map.on("load", function () {
     map.addControl(geocoder, "top-right");
 
@@ -371,8 +373,18 @@ map.on("load", function () {
             'type': 'fill',
             'source': 'states',
             'paint': {
-                'fill-color': 'rgba(200, 100, 255, 0.3)',
-                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+                'fill-color': [
+                    'case', 
+                    ['boolean', ['feature-state', 'hover'], false],
+                    'rgba(200, 100, 255, 0.3)',
+                    'rgba(200, 100, 255, 0)'
+                ],
+                'fill-outline-color': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false],
+                    'rgba(200, 100, 240, 1)',
+                    'rgba(200, 100, 240, 0)'
+                ]
             }
         }
     );
