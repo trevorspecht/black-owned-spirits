@@ -487,20 +487,20 @@ map.on("load", function () {
 
     map.on("mouseenter", "states-layer", function () {
         map.getCanvas().style.cursor = "pointer";
+        map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
     map.on("mouseleave", "states-layer", function () {
         map.getCanvas().style.cursor = "";
+        map.setLayoutProperty('countries-layer', 'visibility', 'visible');
     });
 
     map.on("mouseenter", "countries-layer", function () {
         map.getCanvas().style.cursor = "pointer";
-        map.setLayoutProperty('countries-layer', 'visibility', 'visible');
     });
 
     map.on("mouseleave", "countries-layer", function () {
         map.getCanvas().style.cursor = "";
-        map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
 });
