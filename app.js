@@ -424,6 +424,33 @@ map.on("load", function () {
         'states-layer'
     );
 
+    // update fill-color and fill-outline-color when the mouse moves over a state
+    map.on('mousemove', 'state-layer', function (e) {
+        if (e.features.length > 0) {
+            if (hoveredStateId) {
+                map.setFeatureState(
+                    { source: 'states', id: hoveredStateId },
+                    { hover: false }
+                );
+            }
+            hoveredStateId = e.features[0].id;
+            map.setFeatureState(
+                { source: 'states', id: hoveredStateId },
+                { hover: true }
+            );
+        }
+    });
+
+    // update previously hovered feature when the mouse leaves
+    map.on('mouseleave', 'state-layer', function () {
+        if (hoveredStateId) {
+            map.setFeatureState(
+                { source: 'states', id: hoveredStateId },
+                { hover: false }
+            );
+        }
+    });
+
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
     $(document).ready(function () {
