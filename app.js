@@ -425,7 +425,7 @@ map.on("load", function () {
     );
 
     // update fill-color and fill-outline-color when the mouse moves over a state
-    map.on('mousemove', 'state-layer', function (e) {
+    map.on('mousemove', 'states-layer', function (e) {
         if (e.features.length > 0) {
             if (hoveredStateId) {
                 map.setFeatureState(
@@ -442,7 +442,7 @@ map.on("load", function () {
     });
 
     // update previously hovered feature when the mouse leaves
-    map.on('mouseleave', 'state-layer', function () {
+    map.on('mouseleave', 'states-layer', function () {
         if (hoveredStateId) {
             map.setFeatureState(
                 { source: 'states', id: hoveredStateId },
