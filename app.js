@@ -365,15 +365,42 @@ map.on("load", function () {
     });
 
     // Add a layer showing state polygons for the United States
-    map.addLayer({
-        'id': 'states-layer',
-        'type': 'fill',
-        'source': 'states',
-        'paint': {
-            'fill-color': 'rgba(200, 100, 240, 0.4)',
-            'fill-outline-color': 'rgba(200, 100, 240, 1)'
+    map.addLayer(
+        {
+            'id': 'states-layer',
+            'type': 'fill',
+            'source': 'states',
+            'paint': {
+                'fill-color': 'rgba(200, 100, 255, 0.3)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+            }
         }
+    );
+
+    // add Boundaries tileset to the map
+    map.addSource('country-boundaries', {
+        'type': 'vector',
+        'url': 'mapbox://mapbox.country-boundaries-v1'
     });
+
+    // Add a layer showing country boundary polygons
+    map.addLayer(
+        {
+            'id': 'countries-layer',
+            'type': 'fill',
+            'source': 'country-boundaries',
+            'source-layer': 'country_boundaries',
+            'layout': {
+                'visibility': 'visible'
+            },
+            'paint': {
+                'fill-color': 'rgba(200, 100, 255, 0.3)',
+                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+            }
+        },
+        // makes it so the countries-layer will be rendered underneath the states-layer
+        'states-layer'
+    );
 
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
@@ -442,11 +469,39 @@ map.on("load", function () {
         buildLocationList(clickedStateLocations);
     });
 
+    // sort list by country when a country is clicked
+    map.on('click', 'countries-layer', function (e) {
+        let clickedCountryLocations = {
+            "type": "FeatureCollection",
+            "features": []
+        };
+        const clickedCountry = e.features[0].properties.name;
+        geojsonData.features.forEach(function (feature) {
+            const locations = feature.properties.Locations;
+            if (locations.includes(clickedCountry))
+                clickedCountryLocations.features.push(feature);
+        });
+        map.getSource("locationData").setData(clickedCountryLocations);
+        buildLocationList(clickedCountryLocations);
+    });
+
     map.on("mouseenter", "states-layer", function () {
         map.getCanvas().style.cursor = "pointer";
+        // when pointer is over states-layer make countries-layer invisible
+        // this is because countries-layer was intercepting clicks in states-layer
+        map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
     map.on("mouseleave", "states-layer", function () {
+        map.getCanvas().style.cursor = "";
+        map.setLayoutProperty('countries-layer', 'visibility', 'visible');
+    });
+
+    map.on("mouseenter", "countries-layer", function () {
+        map.getCanvas().style.cursor = "pointer";
+    });
+
+    map.on("mouseleave", "countries-layer", function () {
         map.getCanvas().style.cursor = "";
     });
 
