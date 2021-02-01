@@ -383,24 +383,6 @@ map.on("load", function () {
         'url': 'mapbox://mapbox.country-boundaries-v1'
     });
 
-<<<<<<< HEAD
-        // add Boundaries tileset to the map
-        map.addSource('admin-1', {
-            'type': 'vector',
-            'url': 'mapbox://mapbox.boundaries-adm1-v3'
-        });
-    
-        // Add a layer showing country boundary polygons
-        map.addLayer({
-            'id': 'countries-layer',
-            'type': 'fill',
-            'source': 'admin-1',
-            'paint': {
-                'fill-color': 'rgba(200, 100, 260, 0.4)',
-                'fill-outline-color': 'rgba(200, 100, 260, 1)'
-            }
-        });
-=======
     // Add a layer showing country boundary polygons
     map.addLayer(
         {
@@ -419,7 +401,6 @@ map.on("load", function () {
         // makes it so the countries-layer will be rendered underneath the states-layer
         'states-layer'
     );
->>>>>>> 826a8400b482a53e1973518b2d3cbafea4fc6fdb
 
     // csv2geojson - following the Sheet Mapper tutorial https://www.mapbox.com/impact-tools/sheet-mapper
     console.log("loaded");
