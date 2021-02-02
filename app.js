@@ -424,35 +424,6 @@ map.on("load", function () {
         'states-layer'
     );
 
-    // update fill-color and fill-outline-color when the mouse moves over a state
-    map.on('mousemove', 'states-layer', function (e) {
-        if (e.features.length > 0) {
-            if (hoveredStateId) {
-                map.setFeatureState(
-                    { source: 'states', id: hoveredStateId },
-                    { hover: false }
-                );
-            }
-            let hoveredState = map.queryRenderedFeatures({layers: ['states-layer']});
-            console.log(hoveredState);
-            hoveredStateId = hoveredState.id;
-            map.setFeatureState(
-                { source: 'states', id: hoveredStateId },
-                { hover: true }
-            );
-        }
-    });
-
-    // update previously hovered state when the mouse leaves
-    map.on('mouseleave', 'states-layer', function () {
-        if (hoveredStateId) {
-            map.setFeatureState(
-                { source: 'states', id: hoveredStateId },
-                { hover: false }
-            );
-        }
-    });
-
     // update fill-color and fill-outline-color when the mouse moves over a country
     map.on('mousemove', 'countries-layer', function (e) {
         if (e.features.length > 0) {
@@ -477,6 +448,35 @@ map.on("load", function () {
         if (hoveredCountryId) {
             map.setFeatureState(
                 { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
+                { hover: false }
+            );
+        }
+    });
+
+    // update fill-color and fill-outline-color when the mouse moves over a state
+    map.on('mousemove', 'states-layer', function (e) {
+        if (e.features.length > 0) {
+            if (hoveredStateId) {
+                map.setFeatureState(
+                    { source: 'states', id: hoveredStateId },
+                    { hover: false }
+                );
+            }
+            let hoveredState = map.queryRenderedFeatures({layers: ['states-layer']});
+            console.log(hoveredState);
+            hoveredStateId = hoveredState.id;
+            map.setFeatureState(
+                { source: 'states', id: hoveredStateId },
+                { hover: true }
+            );
+        }
+    });
+
+    // update previously hovered state when the mouse leaves
+    map.on('mouseleave', 'states-layer', function () {
+        if (hoveredStateId) {
+            map.setFeatureState(
+                { source: 'states', id: hoveredStateId },
                 { hover: false }
             );
         }
