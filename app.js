@@ -429,13 +429,13 @@ map.on("load", function () {
         if (e.features.length > 0) {
             if (hoveredCountryId) {
                 map.setFeatureState(
-                    { source: 'country-boundaries', id: hoveredCountryId },
+                    { source: 'country-boundaries', 'source-layer': 'country_boundaries', id: hoveredCountryId },
                     { hover: false }
                 );
             }
             hoveredCountryId = e.features[0].id;
             map.setFeatureState(
-                { source: 'country-boundaries', id: hoveredCountryId },
+                { source: 'country-boundaries', 'source-layer': 'country_boundaries', id: hoveredCountryId },
                 { hover: true }
             );
         }
@@ -445,7 +445,7 @@ map.on("load", function () {
     map.on('mouseleave', 'countries-layer', function () {
         if (hoveredCountryId) {
             map.setFeatureState(
-                { source: 'country-boundaries', id: hoveredCountryId },
+                { source: 'country-boundaries', 'source-layer': 'country_boundaries', id: hoveredCountryId },
                 { hover: false }
             );
         }
