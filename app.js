@@ -535,10 +535,11 @@ map.on("load", function () {
             "type": "FeatureCollection",
             "features": []
         };
-        const clickedState = e.features[0].properties.name;
+        const clickedState = map.queryRenderedFeatures(e.point, { layers: ['states-layer'] });
+        const clickedStateName = clickedState.properties.name;
         geojsonData.features.forEach(function (feature) {
             const locations = feature.properties.Locations;
-            if (locations.includes(clickedState))
+            if (locations.includes(clickedStateName))
                 clickedStateLocations.features.push(feature);
         });
         map.getSource("locationData").setData(clickedStateLocations);
@@ -565,12 +566,12 @@ map.on("load", function () {
         map.getCanvas().style.cursor = "pointer";
         // when pointer is over states-layer make countries-layer invisible
         // this is because countries-layer was intercepting clicks in states-layer
-        map.setLayoutProperty('countries-layer', 'visibility', 'none');
+        // map.setLayoutProperty('countries-layer', 'visibility', 'none');
     });
 
     map.on("mouseleave", "states-layer", function () {
         map.getCanvas().style.cursor = "";
-        map.setLayoutProperty('countries-layer', 'visibility', 'visible');
+        // map.setLayoutProperty('countries-layer', 'visibility', 'visible');
     });
 
     map.on("mouseenter", "countries-layer", function () {
