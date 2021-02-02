@@ -427,15 +427,15 @@ map.on("load", function () {
     // update fill-color and fill-outline-color when the mouse moves over a country
     map.on('mousemove', 'countries-layer', function (e) {
         if (e.features.length > 0) {
-            if (hoveredStateId) {
+            if (hoveredCountryId) {
                 map.setFeatureState(
-                    { source: 'country-boundaries', id: hoveredStateId },
+                    { source: 'country-boundaries', id: hoveredCountryId },
                     { hover: false }
                 );
             }
-            hoveredStateId = e.features[0].id;
+            hoveredCountryId = e.features[0].id;
             map.setFeatureState(
-                { source: 'country-boundaries', id: hoveredStateId },
+                { source: 'country-boundaries', id: hoveredCountryId },
                 { hover: true }
             );
         }
@@ -443,9 +443,9 @@ map.on("load", function () {
 
     // update previously hovered country when the mouse leaves
     map.on('mouseleave', 'countries-layer', function () {
-        if (hoveredStateId) {
+        if (hoveredCountryId) {
             map.setFeatureState(
-                { source: 'country-boundaries', id: hoveredStateId },
+                { source: 'country-boundaries', id: hoveredCountryId },
                 { hover: false }
             );
         }
