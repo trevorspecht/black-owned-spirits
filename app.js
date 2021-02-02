@@ -424,6 +424,33 @@ map.on("load", function () {
         'states-layer'
     );
 
+    // update fill-color and fill-outline-color when the mouse moves over a country
+    map.on('mousemove', 'countries-layer', function (e) {
+        if (e.features.length > 0) {
+            if (hoveredStateId) {
+                map.setFeatureState(
+                    { source: 'country-boundaries', id: hoveredStateId },
+                    { hover: false }
+                );
+            }
+            hoveredStateId = e.features[0].id;
+            map.setFeatureState(
+                { source: 'country-boundaries', id: hoveredStateId },
+                { hover: true }
+            );
+        }
+    });
+
+    // update previously hovered country when the mouse leaves
+    map.on('mouseleave', 'countries-layer', function () {
+        if (hoveredStateId) {
+            map.setFeatureState(
+                { source: 'country-boundaries', id: hoveredStateId },
+                { hover: false }
+            );
+        }
+    });
+
     // update fill-color and fill-outline-color when the mouse moves over a state
     map.on('mousemove', 'states-layer', function (e) {
         if (e.features.length > 0) {
@@ -441,7 +468,7 @@ map.on("load", function () {
         }
     });
 
-    // update previously hovered feature when the mouse leaves
+    // update previously hovered state when the mouse leaves
     map.on('mouseleave', 'states-layer', function () {
         if (hoveredStateId) {
             map.setFeatureState(
