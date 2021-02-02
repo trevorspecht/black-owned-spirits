@@ -424,33 +424,6 @@ map.on("load", function () {
         'states-layer'
     );
 
-    // update fill-color and fill-outline-color when the mouse moves over a country
-    map.on('mousemove', 'countries-layer', function (e) {
-        if (e.features.length > 0) {
-            if (hoveredCountryId) {
-                map.setFeatureState(
-                    { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
-                    { hover: false }
-                );
-            }
-            hoveredCountryId = e.features[0].id;
-            map.setFeatureState(
-                { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
-                { hover: true }
-            );
-        }
-    });
-
-    // update previously hovered country when the mouse leaves
-    map.on('mouseleave', 'countries-layer', function () {
-        if (hoveredCountryId) {
-            map.setFeatureState(
-                { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
-                { hover: false }
-            );
-        }
-    });
-
     // update fill-color and fill-outline-color when the mouse moves over a state
     map.on('mousemove', 'states-layer', function (e) {
         if (e.features.length > 0) {
@@ -473,6 +446,33 @@ map.on("load", function () {
         if (hoveredStateId) {
             map.setFeatureState(
                 { source: 'states', id: hoveredStateId },
+                { hover: false }
+            );
+        }
+    });
+
+    // update fill-color and fill-outline-color when the mouse moves over a country
+    map.on('mousemove', 'countries-layer', function (e) {
+        if (e.features.length > 0) {
+            if (hoveredCountryId) {
+                map.setFeatureState(
+                    { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
+                    { hover: false }
+                );
+            }
+            hoveredCountryId = e.features[0].id;
+            map.setFeatureState(
+                { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
+                { hover: true }
+            );
+        }
+    });
+
+    // update previously hovered country when the mouse leaves
+    map.on('mouseleave', 'countries-layer', function () {
+        if (hoveredCountryId) {
+            map.setFeatureState(
+                { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
                 { hover: false }
             );
         }
