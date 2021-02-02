@@ -434,7 +434,7 @@ map.on("load", function () {
                 );
             }
             let hoveredState = map.queryRenderedFeatures(e.point, {layers: ['states-layer']});
-            hoveredStateId = hoveredState.features[0].id;
+            hoveredStateId = hoveredState.id;
             map.setFeatureState(
                 { source: 'states', id: hoveredStateId },
                 { hover: true }
