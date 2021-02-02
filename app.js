@@ -462,6 +462,8 @@ map.on("load", function () {
                     { hover: false }
                 );
             }
+            let hoveredCountry = map.queryRenderedFeatures({layers: ['states-layer']});
+            console.log(hoveredCountry);
             hoveredCountryId = e.features[0].id;
             map.setFeatureState(
                 { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
