@@ -464,23 +464,6 @@ map.on("load", function () {
         });
     };
 
-
-    // sort list by state when a state is clicked
-    map.on('click', 'states-layer', function (e) {
-        let clickedStateLocations = {
-            "type": "FeatureCollection",
-            "features": []
-        };
-        const clickedState = e.features[0].properties.name;
-        geojsonData.features.forEach(function (feature) {
-            const locations = feature.properties.Locations;
-            if (locations.includes(clickedState))
-                clickedStateLocations.features.push(feature);
-        });
-        map.getSource("locationData").setData(clickedStateLocations);
-        buildLocationList(clickedStateLocations);
-    });
-
     // sort list by country when a country is clicked
     map.on('click', 'countries-layer', function (e) {
         let clickedCountryLocations = {
@@ -495,6 +478,22 @@ map.on("load", function () {
         });
         map.getSource("locationData").setData(clickedCountryLocations);
         buildLocationList(clickedCountryLocations);
+    });
+    
+    // sort list by state when a state is clicked
+    map.on('click', 'states-layer', function (e) {
+        let clickedStateLocations = {
+            "type": "FeatureCollection",
+            "features": []
+        };
+        const clickedState = e.features[0].properties.name;
+        geojsonData.features.forEach(function (feature) {
+            const locations = feature.properties.Locations;
+            if (locations.includes(clickedState))
+                clickedStateLocations.features.push(feature);
+        });
+        map.getSource("locationData").setData(clickedStateLocations);
+        buildLocationList(clickedStateLocations);
     });
 
     map.on("mouseenter", "states-layer", function () {
