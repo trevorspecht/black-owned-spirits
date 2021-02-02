@@ -433,7 +433,7 @@ map.on("load", function () {
                     { hover: false }
                 );
             }
-            let hoveredCountry = map.queryRenderedFeatures({layers: ['countries-layer']});
+            let hoveredCountry = map.queryRenderedFeatures(e.point, {layers: ['countries-layer']});
             console.log(hoveredCountry);
             hoveredCountryId = e.features[0].id;
             map.setFeatureState(
@@ -462,7 +462,7 @@ map.on("load", function () {
                     { hover: false }
                 );
             }
-            let hoveredState = map.queryRenderedFeatures({layers: ['states-layer']});
+            let hoveredState = map.queryRenderedFeatures(e.point, {layers: ['states-layer']});
             console.log(hoveredState);
             hoveredStateId = hoveredState.id;
             map.setFeatureState(
