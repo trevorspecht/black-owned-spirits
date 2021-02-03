@@ -554,7 +554,7 @@ map.on("load", function () {
             "type": "FeatureCollection",
             "features": []
         };
-        const clickedState = e.features[0].properties.name;
+        const clickedState = e.features[0].properties.STATE_NAME;
         geojsonData.features.forEach(function (feature) {
             const locations = feature.properties.Locations;
             if (locations.includes(clickedState))
