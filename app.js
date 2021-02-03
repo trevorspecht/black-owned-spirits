@@ -373,7 +373,7 @@ map.on("load", function () {
             'type': 'fill',
             'source': 'states',
             'paint': {
-                'fill-color': [ // add color on mouse hover
+                'fill-color': [ // add color when feature state hover is true
                     'case', 
                     ['boolean', ['feature-state', 'hover'], false],
                     'rgba(200, 100, 255, 0.3)',
@@ -406,7 +406,7 @@ map.on("load", function () {
                 'visibility': 'visible'
             },
             'paint': {
-                'fill-color': [ // add color on mouse hover
+                'fill-color': [ // add color when feature state hover is true
                     'case', 
                     ['boolean', ['feature-state', 'hover'], false],
                     'rgba(200, 100, 255, 0.3)',
@@ -444,6 +444,15 @@ map.on("load", function () {
 
     // update previously hovered country when the mouse leaves
     map.on('mouseleave', 'countries-layer', function () {
+        if (hoveredCountryId) {
+            map.setFeatureState(
+                { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
+                { hover: false }
+            );
+        }
+    });
+
+    map.on('mousemove', 'states-layer', function () {
         if (hoveredCountryId) {
             map.setFeatureState(
                 { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
