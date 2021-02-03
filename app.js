@@ -62,35 +62,6 @@ function buildLocationList(locationData) {
             div.className;
             details.appendChild(div);
         }
-
-        // link.addEventListener("click", function () {
-        //     const clickedListing = location.geometry.coordinates;
-        //     flyToLocation(clickedListing, 4);
-        //     createPopup(location);
-
-        //     const activeItem = document.getElementsByClassName("active");
-        //     if (activeItem[0]) {
-        //         activeItem[0].classList.remove("active");
-        //     }
-        //     this.parentNode.classList.add("active");
-
-        //     const divList = document.querySelectorAll(".content");
-        //     const divCount = divList.length;
-        //     for (i = 0; i < divCount; i++) {
-        //         divList[i].style.maxHeight = null;
-        //     };
-
-        //     for (let i = 0; i < geojsonData.features.length; i++) {
-        //         this.parentNode.classList.remove("active");
-        //         this.classList.toggle("active");
-        //         const content = this.nextElementSibling;
-        //         if (content.style.maxHeight) {
-        //             content.style.maxHeight = null;
-        //         } else {
-        //             content.style.maxHeight = content.scrollHeight + "px";
-        //         }
-        //     };
-        // });
     });
 
 };

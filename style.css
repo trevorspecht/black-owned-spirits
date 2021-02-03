@@ -1,5 +1,6 @@
 #sidebarA{
     color: white;
+    overflow-y: scroll;
 }
 
 #removeFilters, #filterResults {
