@@ -425,8 +425,9 @@ map.on("load", function () {
     );
 
     // update fill-color and fill-outline-color when the mouse moves over a country
+    // do not highlight United States since we want only states to be highlighted, not the whole country
     map.on('mousemove', 'countries-layer', function (e) {
-        if (e.features.length > 0) {
+        if (e.features.length > 0 && e.features[0].properties.name !== "United States") {
             if (hoveredCountryId) {
                 map.setFeatureState(
                     { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
