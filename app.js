@@ -373,7 +373,7 @@ map.on("load", function () {
             'type': 'fill',
             'source': 'states',
             'paint': {
-                'fill-color': [
+                'fill-color': [ // add color on mouse hover
                     'case', 
                     ['boolean', ['feature-state', 'hover'], false],
                     'rgba(200, 100, 255, 0.3)',
@@ -406,7 +406,7 @@ map.on("load", function () {
                 'visibility': 'visible'
             },
             'paint': {
-                'fill-color': [
+                'fill-color': [ // add color on mouse hover
                     'case', 
                     ['boolean', ['feature-state', 'hover'], false],
                     'rgba(200, 100, 255, 0.3)',
@@ -424,7 +424,7 @@ map.on("load", function () {
         'states-layer'
     );
 
-    // update fill-color and fill-outline-color when the mouse moves over a country
+    // update feature state when the mouse hovers over a country
     // do not highlight United States since we want only states to be highlighted, not the whole country
     map.on('mousemove', 'countries-layer', function (e) {
         if (e.features.length > 0 && e.features[0].properties.name !== "United States") {
@@ -434,8 +434,6 @@ map.on("load", function () {
                     { hover: false }
                 );
             }
-            let hoveredCountry = map.queryRenderedFeatures(e.point, {layers: ['countries-layer']});
-            console.log(hoveredCountry);
             hoveredCountryId = e.features[0].id;
             map.setFeatureState(
                 { source: 'country-boundaries', sourceLayer: 'country_boundaries', id: hoveredCountryId },
@@ -454,7 +452,7 @@ map.on("load", function () {
         }
     });
 
-    // update fill-color and fill-outline-color when the mouse moves over a state
+    // update feature state when the mouse hovers over a state
     map.on('mousemove', 'states-layer', function (e) {
         if (e.features.length > 0) {
             if (hoveredStateId) {
@@ -463,8 +461,10 @@ map.on("load", function () {
                     { hover: false }
                 );
             }
+            // get feature info for states-layer only
+            // necessary to avoid conflict with overlapping countries-layer
             let hoveredState = map.queryRenderedFeatures(e.point, {layers: ['states-layer']});
-            console.log(hoveredState);
+            // console.log(hoveredState);
             hoveredStateId = hoveredState[0].id;
             map.setFeatureState(
                 { source: 'states', id: hoveredStateId },
@@ -550,6 +550,7 @@ map.on("load", function () {
     });
 
     // sort list by state when a state is clicked
+    // putting this after countries-layer click function avoids issues with the overlapping layers
     map.on('click', 'states-layer', function (e) {
         let clickedStateLocations = {
             "type": "FeatureCollection",
