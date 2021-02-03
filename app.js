@@ -363,7 +363,7 @@ map.on("load", function () {
     map.addSource('states', {
         'type': 'geojson',
         'data':
-            'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_110m_admin_1_states_provinces_shp.geojson'
+            'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'
     });
 
     // Add a layer showing state polygons for the United States
