@@ -539,7 +539,7 @@ map.on("load", function () {
         const clickedState = e.features[0].properties.STATE_NAME;
         geojsonData.features.forEach(function (feature) {
             const locations = feature.properties.Locations;
-            if (locations.includes(clickedState))
+            if (locations.includes(clickedState || 'nationwide' || 'Nationwide'))
                 clickedStateLocations.features.push(feature);
         });
         map.getSource("locationData").setData(clickedStateLocations);
