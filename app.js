@@ -541,6 +541,8 @@ map.on("load", function () {
             const locations = feature.properties.Locations;
             if (locations.includes(clickedState || 'nationwide' || 'Nationwide'))
                 clickedStateLocations.features.push(feature);
+            else if (locations.includes('nationwide'))
+                clickedStateLocations.features.push(feature);
         });
         map.getSource("locationData").setData(clickedStateLocations);
         buildLocationList(clickedStateLocations);
