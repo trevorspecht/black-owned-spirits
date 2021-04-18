@@ -1,6 +1,5 @@
 #sidebarA{
     color: white;
-    overflow-y: scroll;
 }
 
 #removeFilters, #filterResults {
@@ -8,11 +7,6 @@
     color: white;
     background-color: #2F215F;
 
-}
-
-#exitButton {
-    font-size: 9px;
-    color: #2F215F;
 }
 
 .theme{
@@ -65,7 +59,6 @@
     border-radius: 0;
     background: #2F215F;
 }
-
 
 .clearfix {
     display: block;
